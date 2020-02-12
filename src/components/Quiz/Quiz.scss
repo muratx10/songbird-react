@@ -1,0 +1,12 @@
+.quiz {
+  grid-area: quiz;
+  display: grid;
+  grid-column-gap: 15px;
+  grid: 1fr / 1fr 2fr;
+  grid-template-areas:
+    "img info";
+}
+
+.bird-info {
+  grid-area: info;
+}

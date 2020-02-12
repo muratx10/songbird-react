@@ -1,0 +1,30 @@
+.bird-details {
+  grid-area: details;
+  display: grid;
+  grid: repeat(3, 55px) 45% / 1fr 1fr;
+  grid-template-areas:
+    "img title"
+    "img subtitle"
+    "img audio"
+    "text text";
+
+  .bird-img {
+    grid-area: img;
+  }
+
+  .title {
+    grid-area: title;
+  }
+
+  .subtitle {
+    grid-area: subtitle;
+  }
+
+  .audioplayer {
+    grid-area: audio;
+  }
+
+  .description {
+    grid-area: text;
+  }
+}
