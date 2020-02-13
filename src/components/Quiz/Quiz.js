@@ -7,11 +7,8 @@ import birdsData from '../../data/birds-data';
 import unknownBird from '../../assets/bird.jpg';
 
 export default class Quiz extends Component {
-
   render() {
     const {win, section, randomID} = this.props;
-    console.log(`Section: ${section}
-    ID: ${randomID}`);
     const alt = win ? birdsData[section][randomID].name : null;
     const imgSrc = win ? birdsData[section][randomID].image : unknownBird;
     const title = win ? birdsData[section][randomID].name : '*********';

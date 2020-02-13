@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import './App.scss';
 import Logo from '../Logo';
 import Score from '../Score';
@@ -9,6 +9,7 @@ import NavBar from '../Navbar';
 import Quiz from '../Quiz';
 import logo from '../../assets/logo.svg';
 import Data from '../../data';
+import EndGame from '../EndGame';
 
 export default class App extends Component {
 
@@ -20,10 +21,7 @@ export default class App extends Component {
     score: 0,
     attempt: 0,
     win: false,
-    audioSrc: null,
-    imageSrc: null,
-    title: null,
-    alt: null,
+    endGame: false
   };
 
   componentDidMount() {
@@ -92,10 +90,11 @@ export default class App extends Component {
   };
 
   nextSection = () => {
-    if(!this.state.win) return true;
-    if(this.state.section === 5) {
+    if (!this.state.win) return true;
+    if (this.state.section === 5) {
       this.setState({
-        section: -1
+        section: -1,
+        endGame: true
       });
     }
     this.setState((state) => ({
@@ -110,17 +109,23 @@ export default class App extends Component {
   };
 
   random = () => {
-    return Math.floor(Math.random() * 6);
+    const n = Math.floor(Math.random() * 6);
+    console.log(`Правильный ответ: ${n + 1}`);
+    return n;
   };
 
   render() {
+    const className = this.state.endGame ? 'content blur' : 'content';
+
     return (
       <>
-        <h1>{this.state.randomID}</h1>
-        <Logo src={logo}/>
-        <Score score={this.state.score}/>
-        <main className="content">
-          <NavBar section={this.state.section}/>
+        <Logo src={logo} />
+        <Score score={this.state.score} />
+        <EndGame
+          endGame={this.state.endGame}
+        />
+        <main className={className}>
+          <NavBar section={this.state.section} />
           <Quiz
             section={this.state.section}
             randomID={this.state.randomID}
@@ -136,11 +141,12 @@ export default class App extends Component {
             id={this.state.selectedID}
           />
           <Button
-            label="Next level"
+            label="Следующий вопрос"
             win={this.state.win}
             nextSection={this.nextSection}
             reset={this.styleAnswer}
             selected={this.state.selected}
+            endGame={this.state.endGame}
           />
         </main>
       </>

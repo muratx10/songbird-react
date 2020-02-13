@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Nunito:300,400,700&display=swap&subset=cyrillic');
+@import url("https://fonts.googleapis.com/css?family=Nunito:300,400,700&display=swap&subset=cyrillic");
 
 .content {
   grid-area: main;
@@ -10,4 +10,8 @@
     "quiz quiz"
     "list details"
     "btn btn";
+}
+
+.blur {
+  filter: blur(5px);
 }

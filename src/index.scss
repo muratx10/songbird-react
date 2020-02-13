@@ -1,7 +1,7 @@
 body {
   background: #222222;
   color: #ffffff;
-  font-family: 'Nunito', sans-serif;
+  font-family: "Nunito", sans-serif;
 }
 
 #root {
@@ -13,6 +13,7 @@ body {
   display: grid;
   grid: repeat(2, 1fr) / repeat(2 / 1fr);
   grid-template-areas:
-      "logo score"
-      "main main";
+    "logo score"
+    "main main";
+  position: relative;
 }

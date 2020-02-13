@@ -25,6 +25,6 @@ export default class NavBar extends Component {
           <li className='section'>Морские птицы</li>
         </ul>
       </nav>
-    )
+    );
   }
 }
