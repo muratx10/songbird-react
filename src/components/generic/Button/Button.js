@@ -1,10 +1,20 @@
 import React from 'react';
 import './Button.scss';
 
-const Button = ({ label }) => (
-  <button className="button level" type="button">
-    {label}
-  </button>
-);
+
+const Button = ({ win, label, nextSection }) => {
+  let btnStyle = 'button level ';
+  let disable = false;
+  if (!win) {
+    btnStyle += 'disabled';
+    disable = true;
+  }
+
+  return (
+    <button className={btnStyle} disabled={disable} type="button" onClick={nextSection}>
+      {label}
+    </button>
+  );
+};
 
 export default Button;

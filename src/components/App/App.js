@@ -8,6 +8,7 @@ import Button from '../generic/Button';
 import NavBar from '../Navbar';
 import Quiz from '../Quiz';
 import logo from '../../assets/logo.svg';
+import Data from '../../data';
 
 export default class App extends Component {
 
@@ -19,13 +20,36 @@ export default class App extends Component {
     score: 0,
     attempt: 0,
     win: false,
+    audioSrc: null,
+    imageSrc: null,
+    title: null,
+    alt: null,
   };
 
   componentDidMount() {
     this.setState({
       randomID: this.random()
-    })
+    });
+    // this.fetchData();
+    // console.log(this.state);
   };
+
+  // fetchData = () => {
+  //   const random = this.random();
+  //   const {section} = this.state;
+  //   this.setState({
+  //     randomID: random
+  //   });
+  //   Data(random, section)
+  //     .then((response) => {
+  //       this.setState({
+  //         title: response[0],
+  //         imageSrc: response[1],
+  //         audioSrc: response[2],
+  //       });
+  //     })
+  //     .catch(err => console.log(err))
+  // };
 
   selectAnswer = (id, e) => {
     e.persist();
@@ -33,7 +57,9 @@ export default class App extends Component {
       selectedID: id - 1,
       selected: true
     });
-    if (!e.target.classList.contains('correct') && !e.target.classList.contains('incorrect')) {
+    const correct = e.target.children[0].classList.contains('correct');
+    const incorrect = e.target.children[0].classList.contains('incorrect');
+    if (!correct && !incorrect) {
       this.setState((state) => ({
         attempt: state.attempt + 1
       }));
@@ -51,38 +77,71 @@ export default class App extends Component {
   };
 
   styleAnswer = (e) => {
-    if(e._targetInst.key - 1 === this.state.randomID && !this.state.win) {
-      console.log(e.target.children[0]);
-      e.target.children[0].classList.add('correct')
-    } else if(e._targetInst.key - 1 !== this.state.randomID && !this.state.win) {
-      e.target.children[0].classList.add('incorrect')
+    if (e._targetInst.key - 1 === this.state.randomID && !this.state.win) {
+      e.target.children[0].classList.add('correct');
+    } else if (e._targetInst.key - 1 !== this.state.randomID && !this.state.win) {
+      e.target.children[0].classList.add('incorrect');
     }
   };
 
+  resetStyle = () => {
+    const el = document.querySelectorAll('.radioBtn');
+    el.forEach((item) => {
+      item.className = 'radioBtn';
+    })
+  };
+
+  nextSection = () => {
+    if(!this.state.win) return true;
+    if(this.state.section === 5) {
+      this.setState({
+        section: -1
+      });
+    }
+    this.setState((state) => ({
+      attempt: 0,
+      section: state.section + 1,
+      win: false,
+      selected: false,
+      randomID: this.random(),
+      selectedID: 0
+    }));
+    this.resetStyle();
+  };
+
   random = () => {
-    return Math.floor((Math.random() * 6) + 1);
+    return Math.floor(Math.random() * 6);
   };
 
   render() {
     return (
       <>
+        <h1>{this.state.randomID}</h1>
         <Logo src={logo}/>
         <Score score={this.state.score}/>
         <main className="content">
-          <NavBar/>
+          <NavBar section={this.state.section}/>
           <Quiz
             section={this.state.section}
             randomID={this.state.randomID}
             win={this.state.win}
           />
-          <AnswerList section={this.state.section}
-                      selectAnswer={this.selectAnswer}/>
+          <AnswerList
+            section={this.state.section}
+            selectAnswer={this.selectAnswer}
+          />
           <Details
             selected={this.state.selected}
             section={this.state.section}
             id={this.state.selectedID}
           />
-          <Button label="Next level"/>
+          <Button
+            label="Next level"
+            win={this.state.win}
+            nextSection={this.nextSection}
+            reset={this.styleAnswer}
+            selected={this.state.selected}
+          />
         </main>
       </>
     )
