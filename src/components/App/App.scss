@@ -3,15 +3,21 @@
 .content {
   grid-area: main;
   display: grid;
-  grid: 50px 35% minmax(315px, 2fr) 1fr / repeat(2, 1fr);
+  grid: 50px 25% minmax(315px, 2fr) 1fr / repeat(2, 1fr);
   grid-row-gap: 15px;
   grid-template-areas:
     "nav nav"
     "quiz quiz"
     "list details"
     "btn btn";
-}
 
-.blur {
-  filter: blur(5px);
+  @media only screen and (max-width: 900px) {
+    grid: 50px 180px minmax(200px, 1fr) 1fr / repeat(2, 1fr);
+    grid-template-areas:
+      "nav nav"
+      "quiz quiz"
+      "list list"
+      "details details"
+      "btn btn";
+  }
 }

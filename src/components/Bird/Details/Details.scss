@@ -1,15 +1,33 @@
 .bird-details {
-  grid-area: details;
+  position: relative;
   display: grid;
+  grid-area: details;
   grid: repeat(3, 55px) 45% / 1fr 1fr;
-  grid-template-areas:
-    "img title"
-    "img subtitle"
-    "img audio"
-    "text text";
+  grid-template-areas: "img title" "img subtitle" "img audio" "text text";
+
+  @media only screen and (max-width: 900px) {
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      background: #484848;
+      top: -10px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+    }
+  }
 
   .bird-img {
     grid-area: img;
+
+    @media only screen and (max-width: 576px) {
+      width: 80%;
+
+      img {
+        width: 300px;
+      }
+    }
   }
 
   .title {
@@ -22,9 +40,20 @@
 
   .audioplayer {
     grid-area: audio;
+
+    @media only screen and (max-width: 576px) {
+      audio {
+        width: 100%;
+      }
+    }
   }
 
   .description {
     grid-area: text;
+  }
+
+  @media only screen and (max-width: 576px) {
+    grid: 55px 55px 65px 55px 45% / 2fr 1fr;
+    grid-template-areas: "img title" "img subtitle" "img subtitle" "audio audio" "text text";
   }
 }

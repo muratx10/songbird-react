@@ -9,10 +9,12 @@
     height: 100%;
     margin: 0;
     padding: 0;
+    display: grid;
+    grid: 1fr / repeat(6, 1fr);
 
     li {
       display: inline-block;
-      width: calc(100% / 6 - 30px);
+     // width: calc(100% / 6 - 30px);
       padding: 10px 15px;
       text-align: center;
       background: #008966;

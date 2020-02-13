@@ -22,13 +22,13 @@ export default class App extends Component {
     attempt: 0,
     win: false,
     endGame: false
-  }
+  };
 
   componentDidMount() {
     this.setState({
       randomID: this.random()
     });
-  }
+  };
 
   selectAnswer = (id, e) => {
     e.persist();
@@ -45,7 +45,7 @@ export default class App extends Component {
     }
     this.checkAnswer(id);
     this.styleAnswer(e);
-  }
+  };
 
   checkAnswer = (id) => {
     if (id - 1 !== this.state.randomID || this.state.win) return;
@@ -56,7 +56,7 @@ export default class App extends Component {
       score: state.score + 5 - this.state.attempt,
       win: true
     }))
-  }
+  };
 
   styleAnswer = (e) => {
     if (e._targetInst.key - 1 === this.state.randomID && !this.state.win) {
@@ -64,22 +64,24 @@ export default class App extends Component {
     } else if (e._targetInst.key - 1 !== this.state.randomID && !this.state.win) {
       e.target.children[0].classList.add('incorrect');
     }
-  }
+  };
 
   resetStyle = () => {
     const el = document.querySelectorAll('.radioBtn');
     el.forEach((item) => {
       item.className = 'radioBtn';
     })
-  }
+  };
 
-  nextSection = () => {
+  action = () => {
     if (!this.state.win) return true;
     if (this.state.section === 5) {
       this.setState({
         section: -1,
-        endGame: true
+        endGame: true,
+        win: false
       });
+      this.endGame();
     }
     this.setState((state) => ({
       attempt: 0,
@@ -90,21 +92,31 @@ export default class App extends Component {
       selectedID: 0
     }));
     this.resetStyle();
-  }
+  };
 
   random = () => {
     const n = Math.floor(Math.random() * 6);
     console.log(`Правильный ответ: ${n + 1}`);
     return n;
-  }
+  };
 
   endGame = () => {
+    const content = document.querySelector('.content');
+    content.style.display = 'none';
+  };
 
-  }
+  startNewGame = () => {
+    const content = document.querySelector('.content');
+    const winner = document.querySelector('.end-game');
+    content.style.display = 'grid';
+    winner.style.display = 'none';
+    this.setState({
+      score: 0
+    })
+
+  };
 
   render() {
-    const className = this.state.endGame ? 'content blur' : 'content';
-
     return (
       <>
         <Logo src={logo} />
@@ -112,8 +124,9 @@ export default class App extends Component {
         <EndGame
           endGame={this.state.endGame}
           score={this.state.score}
+          action={this.startNewGame}
         />
-        <main className={className}>
+        <main className="content">
           <NavBar section={this.state.section} />
           <Quiz
             section={this.state.section}
@@ -132,7 +145,7 @@ export default class App extends Component {
           <Button
             label="Следующий вопрос"
             win={this.state.win}
-            nextSection={this.nextSection}
+            action={this.action}
             reset={this.styleAnswer}
             selected={this.state.selected}
             endGame={this.state.endGame}
