@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Title from '../Bird/Title';
 import Audio from '../Bird/Audio';
 import Image from '../Bird/Image';
@@ -8,7 +8,7 @@ import unknownBird from '../../assets/bird.jpg';
 
 export default class Quiz extends Component {
   render() {
-    const {win, section, randomID} = this.props;
+    const { win, section, randomID } = this.props;
     const alt = win ? birdsData[section][randomID].name : null;
     const imgSrc = win ? birdsData[section][randomID].image : unknownBird;
     const title = win ? birdsData[section][randomID].name : '*********';
@@ -17,7 +17,7 @@ export default class Quiz extends Component {
         <Image image={imgSrc} alt={alt} />
         <div className="bird-info">
           <Title title={title} />
-          <Audio src={birdsData[section][randomID]} />
+          <Audio src={birdsData[section][randomID].audio} />
         </div>
       </div>
     );

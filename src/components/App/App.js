@@ -22,32 +22,13 @@ export default class App extends Component {
     attempt: 0,
     win: false,
     endGame: false
-  };
+  }
 
   componentDidMount() {
     this.setState({
       randomID: this.random()
     });
-    // this.fetchData();
-    // console.log(this.state);
-  };
-
-  // fetchData = () => {
-  //   const random = this.random();
-  //   const {section} = this.state;
-  //   this.setState({
-  //     randomID: random
-  //   });
-  //   Data(random, section)
-  //     .then((response) => {
-  //       this.setState({
-  //         title: response[0],
-  //         imageSrc: response[1],
-  //         audioSrc: response[2],
-  //       });
-  //     })
-  //     .catch(err => console.log(err))
-  // };
+  }
 
   selectAnswer = (id, e) => {
     e.persist();
@@ -64,15 +45,18 @@ export default class App extends Component {
     }
     this.checkAnswer(id);
     this.styleAnswer(e);
-  };
+  }
 
   checkAnswer = (id) => {
     if (id - 1 !== this.state.randomID || this.state.win) return;
+    document.querySelectorAll('audio').forEach((item) => {
+      item.pause();
+    });
     this.setState((state) => ({
       score: state.score + 5 - this.state.attempt,
       win: true
     }))
-  };
+  }
 
   styleAnswer = (e) => {
     if (e._targetInst.key - 1 === this.state.randomID && !this.state.win) {
@@ -80,14 +64,14 @@ export default class App extends Component {
     } else if (e._targetInst.key - 1 !== this.state.randomID && !this.state.win) {
       e.target.children[0].classList.add('incorrect');
     }
-  };
+  }
 
   resetStyle = () => {
     const el = document.querySelectorAll('.radioBtn');
     el.forEach((item) => {
       item.className = 'radioBtn';
     })
-  };
+  }
 
   nextSection = () => {
     if (!this.state.win) return true;
@@ -106,13 +90,17 @@ export default class App extends Component {
       selectedID: 0
     }));
     this.resetStyle();
-  };
+  }
 
   random = () => {
     const n = Math.floor(Math.random() * 6);
     console.log(`Правильный ответ: ${n + 1}`);
     return n;
-  };
+  }
+
+  endGame = () => {
+
+  }
 
   render() {
     const className = this.state.endGame ? 'content blur' : 'content';
@@ -123,6 +111,7 @@ export default class App extends Component {
         <Score score={this.state.score} />
         <EndGame
           endGame={this.state.endGame}
+          score={this.state.score}
         />
         <main className={className}>
           <NavBar section={this.state.section} />

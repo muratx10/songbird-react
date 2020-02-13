@@ -4,7 +4,7 @@ import './EndGame.scss';
 
 export default class EndGame extends Component {
   render() {
-    const { endGame } = this.props;
+    const { endGame, score } = this.props;
     const elem = endGame ? 'CONGRATS' : 'ПОЗДРАВЛЯЕМ!';
 
     return (

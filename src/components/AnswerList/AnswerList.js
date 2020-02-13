@@ -1,16 +1,16 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './AnswerList.scss';
 import birdsData from '../../data/birds-data';
 
 const AnswerList = ({ section, selectAnswer }) => {
-  const className = section % 1 === 0 ? 'radioBtn' : 'radioBtn';
   const items = birdsData[section].map((el) => (
     <li
       className="answer-item"
       key={el.id}
       onClick={(e) => selectAnswer(el.id, e)}
     >
-      <span className={className} />
+      <span className="radioBtn" />
       {el.name}
     </li>
   ));
@@ -20,6 +20,10 @@ const AnswerList = ({ section, selectAnswer }) => {
       {items}
     </ul>
   );
+};
+
+AnswerList.propTypes = {
+  section: PropTypes.number.isRequired,
 };
 
 export default AnswerList;

@@ -7,7 +7,7 @@ import Audio from '../Audio';
 import './Details.scss';
 import birdsData from '../../../data/birds-data';
 
-const Details = ({selected, id, section}) => {
+const Details = ({ selected, id, section }) => {
   const styleTip = {
     display: selected ? 'none' : 'block',
   };
@@ -27,7 +27,7 @@ const Details = ({selected, id, section}) => {
       <Image image={birdsData[section][id].image} />
       <Title title={birdsData[section][id].name} />
       <Subtitle subtitle={birdsData[section][id].species} />
-      <Audio audio={birdsData[section][id].audio} />
+      <Audio src={birdsData[section][id].audio} />
       <Description text={birdsData[section][id].description} />
     </div>
   );
