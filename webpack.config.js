@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const sass = require('sass');
 
+const SRC = path.resolve(__dirname, 'node_modules');
 const ENV = process.env.npm_lifecycle_event;
 const isDev = ENV === 'dev';
 const isProd = ENV === 'build';
@@ -87,6 +88,12 @@ const conf = {
           options: {
             outputPath: 'assets/images',
           },
+        },
+      },
+      {
+        test: /\.mp3$/,
+        use: {
+          loader: 'file-loader',
         },
       },
       {
