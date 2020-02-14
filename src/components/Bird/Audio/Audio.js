@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Audio.scss';
 
 const Audio = ({ src }) => (
@@ -7,5 +8,9 @@ const Audio = ({ src }) => (
     <audio src={src} controls />
   </div>
 );
+
+Audio.propTypes = {
+  src: PropTypes.string.isRequired,
+};
 
 export default Audio;

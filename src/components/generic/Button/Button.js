@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Button.scss';
 
 
@@ -18,6 +19,13 @@ const Button = ({ win, label, action, endGame }) => {
       {label}
     </button>
   );
+};
+
+Button.propTypes = {
+  win: PropTypes.bool.isRequired,
+  label: PropTypes.string.isRequired,
+  action: PropTypes.func.isRequired,
+  endGame: PropTypes.bool.isRequired,
 };
 
 export default Button;

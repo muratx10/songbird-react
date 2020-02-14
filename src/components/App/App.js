@@ -11,6 +11,7 @@ import logo from '../../assets/logo.svg';
 import EndGame from '../EndGame';
 import fail from '../../assets/sounds/fail.mp3';
 import success from '../../assets/sounds/success.mp3';
+import AudioSwitcher from '../AudioSwitcher';
 
 export default class App extends Component {
 
@@ -22,7 +23,8 @@ export default class App extends Component {
     score: 0,
     attempt: 0,
     win: false,
-    endGame: false
+    endGame: false,
+    isMuteOn: false,
   };
 
   componentDidMount() {
@@ -52,12 +54,12 @@ export default class App extends Component {
     this.fail = new Audio(fail);
     this.success = new Audio(success);
     if (id - 1 !== this.state.randomID || this.state.win) {
-      this.fail.play();
+      if(!this.state.isMuteOn && !this.state.win) this.fail.play();
         return;
     }
     document.querySelectorAll('audio').forEach((item) => {
       item.pause();
-      this.success.play();
+      if(!this.state.isMuteOn && !this.state.win) this.success.play();
     });
     this.setState((state) => ({
       score: state.score + 5 - this.state.attempt,
@@ -121,7 +123,11 @@ export default class App extends Component {
       score: 0,
       endGame: false,
     })
-
+  };
+  mute = () => {
+    this.setState((state) => ({
+      isMuteOn: !state.isMuteOn
+    }))
   };
 
   render() {
@@ -136,6 +142,9 @@ export default class App extends Component {
     return (
       <>
         <Logo src={logo} />
+        <AudioSwitcher
+          isMuteOn={this.state.isMuteOn}
+          mute={this.mute} />
         <Score score={this.state.score} />
         <main className="content">
           <NavBar section={this.state.section} />

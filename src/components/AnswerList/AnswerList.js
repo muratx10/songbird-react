@@ -24,6 +24,7 @@ const AnswerList = ({ section, selectAnswer }) => {
 
 AnswerList.propTypes = {
   section: PropTypes.number.isRequired,
+  selectAnswer: PropTypes.func.isRequired,
 };
 
 export default AnswerList;

@@ -1,0 +1,47 @@
+.muteBtn {
+  cursor: pointer;
+  transition: 150ms;
+  font-size: 1.5rem;
+  position: absolute;
+  top: 30px;
+  right: 120px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  @media only screen and (max-width: 640px) {
+    display: none;
+  }
+
+  &:after {
+    content: '';
+    display: none;
+    width: 2px;
+    height: 120%;
+    background: red;
+    position: absolute;
+    top: -3px;
+    left: 12px;
+    transform: rotate(45deg);
+  }
+
+  &:before {
+    content: '';
+    display: none;
+    width: 2px;
+    height: 120%;
+    background: red;
+    position: absolute;
+    top: -3px;
+    left: 12px;
+    transform: rotate(-45deg);
+  }
+}
+
+.muteOn.muteBtn:after,
+.muteOn.muteBtn:before {
+  display: block;
+}
+
+

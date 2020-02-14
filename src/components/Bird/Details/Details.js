@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Title from '../Title';
 import Subtitle from '../Subtitle';
 import Image from '../Image';
@@ -24,7 +25,10 @@ const Details = ({ selected, id, section }) => {
 
   const elem = (
     <div className="bird-details">
-      <Image image={birdsData[section][id].image} />
+      <Image
+        image={birdsData[section][id].image}
+        alt={birdsData[section][id].name}
+      />
       <Title title={birdsData[section][id].name} />
       <Subtitle subtitle={birdsData[section][id].species} />
       <Audio src={birdsData[section][id].audio} />
@@ -35,6 +39,12 @@ const Details = ({ selected, id, section }) => {
   return (
     selected ? elem : tip
   );
+};
+
+Details.propTypes = {
+  selected: PropTypes.bool.isRequired,
+  id: PropTypes.number.isRequired,
+  section: PropTypes.number.isRequired,
 };
 
 export default Details;

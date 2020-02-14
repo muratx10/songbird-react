@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Title from '../Bird/Title';
 import Audio from '../Bird/Audio';
 import Image from '../Bird/Image';
@@ -23,3 +24,9 @@ export default class Quiz extends Component {
     );
   }
 }
+
+Quiz.propTypes = {
+  win: PropTypes.bool.isRequired,
+  section: PropTypes.number.isRequired,
+  randomID: PropTypes.number.isRequired,
+};

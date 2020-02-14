@@ -36,5 +36,7 @@ export default class EndGame extends Component {
 }
 
 EndGame.propTypes = {
-  endGame: PropTypes.bool,
+  endGame: PropTypes.bool.isRequired,
+  score: PropTypes.number.isRequired,
+  action: PropTypes.func.isRequired,
 };
