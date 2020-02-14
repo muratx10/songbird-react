@@ -21,8 +21,12 @@ const Button = ({ win, label, action, endGame }) => {
   );
 };
 
+Button.defaultProps = {
+  win: undefined,
+};
+
 Button.propTypes = {
-  win: PropTypes.bool.isRequired,
+  win: PropTypes.bool,
   label: PropTypes.string.isRequired,
   action: PropTypes.func.isRequired,
   endGame: PropTypes.bool.isRequired,

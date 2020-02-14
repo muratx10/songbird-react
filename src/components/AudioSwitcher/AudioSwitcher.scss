@@ -24,6 +24,7 @@
     top: -3px;
     left: 12px;
     transform: rotate(45deg);
+    animation: mute linear 100ms;
   }
 
   &:before {
@@ -36,12 +37,23 @@
     top: -3px;
     left: 12px;
     transform: rotate(-45deg);
+    animation: mute linear 100ms;
   }
 }
 
 .muteOn.muteBtn:after,
 .muteOn.muteBtn:before {
   display: block;
+}
+
+@keyframes mute {
+  from {
+    height: 0;
+    transform: rotate(0);
+  }
+  to {
+    height: 100%;
+  }
 }
 
 
