@@ -5,7 +5,10 @@ import './Button.scss';
 const Button = ({ win, label, action, endGame }) => {
   let btnStyle = 'button level ';
   let disable = false;
-  if (!win) {
+  if (endGame) {
+    disable = false;
+  }
+  if (!win && !endGame) {
     btnStyle += 'disabled';
     disable = false;
   }
