@@ -52,13 +52,11 @@ export default class App extends Component {
     this.fail = new Audio(fail);
     this.success = new Audio(success);
     if (id - 1 !== this.state.randomID || this.state.win) {
-      console.log(fail);
       this.fail.play();
         return;
     }
     document.querySelectorAll('audio').forEach((item) => {
       item.pause();
-      console.log(success);
       this.success.play();
     });
     this.setState((state) => ({
