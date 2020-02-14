@@ -4,6 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const sass = require('sass');
 
+const SRC = path.resolve(__dirname, 'node_modules');
 const ENV = process.env.npm_lifecycle_event;
 const isDev = ENV === 'dev';
 const isProd = ENV === 'build';
@@ -90,6 +91,12 @@ const conf = {
         },
       },
       {
+        test: /\.mp3$/,
+        use: {
+          loader: 'file-loader',
+        },
+      },
+      {
         test: /\.(woff|woff2|ttf|otf|eot)$/,
         use: [
           {
@@ -113,6 +120,7 @@ const conf = {
     }),
     new HtmlWebpackPlugin({
       template: 'src/index.html',
+      favicon: 'src/assets/birdIcon.ico',
       minify: {
         collapseWhitespace: true,
         removeComments: true,

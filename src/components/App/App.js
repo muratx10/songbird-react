@@ -8,8 +8,9 @@ import Button from '../generic/Button';
 import NavBar from '../Navbar';
 import Quiz from '../Quiz';
 import logo from '../../assets/logo.svg';
-import Data from '../../data';
 import EndGame from '../EndGame';
+import fail from '../../assets/sounds/fail.mp3';
+import success from '../../assets/sounds/success.mp3';
 
 export default class App extends Component {
 
@@ -48,14 +49,22 @@ export default class App extends Component {
   };
 
   checkAnswer = (id) => {
-    if (id - 1 !== this.state.randomID || this.state.win) return;
+    this.fail = new Audio(fail);
+    this.success = new Audio(success);
+    if (id - 1 !== this.state.randomID || this.state.win) {
+      console.log(fail);
+      this.fail.play();
+        return;
+    }
     document.querySelectorAll('audio').forEach((item) => {
       item.pause();
+      console.log(success);
+      this.success.play();
     });
     this.setState((state) => ({
       score: state.score + 5 - this.state.attempt,
       win: true
-    }))
+    }));
   };
 
   styleAnswer = (e) => {
@@ -73,7 +82,7 @@ export default class App extends Component {
     })
   };
 
-  action = () => {
+  nextLevel = () => {
     if (!this.state.win) return true;
     if (this.state.section === 5) {
       this.setState({
@@ -111,21 +120,25 @@ export default class App extends Component {
     content.style.display = 'grid';
     winner.style.display = 'none';
     this.setState({
-      score: 0
+      score: 0,
+      endGame: false,
     })
 
   };
 
   render() {
+    const endGameComp = (
+      <EndGame
+        endGame={this.state.endGame}
+        score={this.state.score}
+        action={this.startNewGame}
+      />
+    );
+    const end = this.state.endGame ? endGameComp : null;
     return (
       <>
         <Logo src={logo} />
         <Score score={this.state.score} />
-        <EndGame
-          endGame={this.state.endGame}
-          score={this.state.score}
-          action={this.startNewGame}
-        />
         <main className="content">
           <NavBar section={this.state.section} />
           <Quiz
@@ -145,12 +158,13 @@ export default class App extends Component {
           <Button
             label="Следующий вопрос"
             win={this.state.win}
-            action={this.action}
+            action={this.nextLevel}
             reset={this.styleAnswer}
             selected={this.state.selected}
             endGame={this.state.endGame}
           />
         </main>
+        {end}
       </>
     )
   }
