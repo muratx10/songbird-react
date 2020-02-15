@@ -20,4 +20,12 @@
       "details details"
       "btn btn";
   }
+
+  @media only screen and (max-width: 576px) {
+    grid: 50px 180px minmax(200px, 330px) 1fr / repeat(2, 1fr);
+  }
+
+  @media only screen and (max-width: 480px) {
+    grid-row-gap: 35px;
+  }
 }

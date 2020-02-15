@@ -2,8 +2,6 @@
   width: 100%;
   border-radius: 15px;
   grid-area: nav;
-  //overflow: hidden;
-  //max-height: 50px;
 
   ul {
     height: 100%;
@@ -14,12 +12,20 @@
 
     li {
       display: inline-block;
-     // width: calc(100% / 6 - 30px);
       padding: 10px 15px;
       text-align: center;
       background: #008966;
       transition: 150ms;
       cursor: default;
+
+      @media only screen and (max-width: 480px) {
+        font-size: 1.2rem;
+      }
+    }
+
+    @media only screen and (max-width: 480px) {
+      display: grid;
+      grid: repeat(3, 1fr) / repeat(3, 1fr);
     }
   }
 }

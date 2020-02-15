@@ -19,6 +19,10 @@
   &:hover {
     background: lighten(#222222, 15%);
   }
+
+  @media only screen and (max-width: 480px) {
+    font-size: 1.6rem;
+  }
 }
 
 .radioBtn {
@@ -29,6 +33,11 @@
   margin-right: 15px;
   border-radius: 50%;
   background: lighten(#222222, 15%);
+
+  @media only screen and (max-width: 480px) {
+    width: 15px;
+    height: 15px;
+  }
 }
 
 .correct {
