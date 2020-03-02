@@ -15,10 +15,12 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^4.4.1",
     "i": "^0.3.6",
     "npm": "^6.13.7",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0-beta.17",
     "react-dom": "^16.12.0"
   },
   "devDependencies": {
@@ -38,6 +40,7 @@
     "copy-webpack-plugin": "^5.1.1",
     "core-js": "^3.6.4",
     "css-loader": "^3.4.2",
+    "css-mqpacker": "^7.0.0",
     "cssnano": "^4.1.10",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",

@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import './Button.scss';
 
 
-const Button = ({ win, label, action, endGame }) => {
+const Button = ({
+  win, label, action, endGame,
+}) => {
   let btnStyle = 'button level ';
   let disable = false;
   if (endGame) {

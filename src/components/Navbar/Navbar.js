@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Navbar.scss';
+import { Container, Row, Col } from 'react-bootstrap';
 
 
 export default class NavBar extends Component {
@@ -17,16 +18,16 @@ export default class NavBar extends Component {
 
   render() {
     return (
-      <nav className="navbar">
-        <ul>
-          <li className="section active">Разминка</li>
-          <li className="section">Воробьиные</li>
-          <li className="section">Лесные птицы</li>
-          <li className="section">Певчие птицы</li>
-          <li className="section">Хищьные птицы</li>
-          <li className="section">Морские птицы</li>
-        </ul>
-      </nav>
+      <Container>
+        <Row className="navbar">
+          <Col className="section active" sm={4} xs={6} lg={2}>Разминка</Col>
+          <Col className="section" sm={4} xs={6} lg={2}>Воробьиные</Col>
+          <Col className="section" sm={4} xs={6} lg={2}>Лесные птицы</Col>
+          <Col className="section" sm={4} xs={6} lg={2}>Певчие птицы</Col>
+          <Col className="section" sm={4} xs={6} lg={2}>Хищьные птицы</Col>
+          <Col className="section" sm={4} xs={6} lg={2}>Морские птицы</Col>
+        </Row>
+      </Container>
     );
   }
 }

@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Figure } from 'react-bootstrap';
 import './Image.scss';
 
+
 const Image = ({ image, alt }) => (
-  <div className="bird-img">
-    <img alt={alt} src={image} width="200px" />
-  </div>
+  <Figure className="bird-img">
+    <Figure.Image width="200px" src={image} alt={alt}>
+    </Figure.Image>
+  </Figure>
 );
 
 Image.defaultProps = {

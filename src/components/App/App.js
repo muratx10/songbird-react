@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import './App.scss';
+import React, {Component} from 'react';
 import Logo from '../Logo';
 import Score from '../Score';
 import AnswerList from '../AnswerList';
@@ -12,6 +11,9 @@ import EndGame from '../EndGame';
 import fail from '../../assets/sounds/fail.mp3';
 import success from '../../assets/sounds/success.mp3';
 import AudioSwitcher from '../AudioSwitcher';
+import {Alert, Col, Container, Row} from 'react-bootstrap';
+import './App.scss';
+
 
 export default class App extends Component {
 
@@ -54,12 +56,12 @@ export default class App extends Component {
     this.fail = new Audio(fail);
     this.success = new Audio(success);
     if (id - 1 !== this.state.randomID || this.state.win) {
-      if(!this.state.isMuteOn && !this.state.win) this.fail.play();
-        return;
+      if (!this.state.isMuteOn && !this.state.win) this.fail.play();
+      return;
     }
     document.querySelectorAll('audio').forEach((item) => {
       item.pause();
-      if(!this.state.isMuteOn && !this.state.win) this.success.play();
+      if (!this.state.isMuteOn && !this.state.win) this.success.play();
     });
     this.setState((state) => ({
       score: state.score + 5 - this.state.attempt,
@@ -138,39 +140,66 @@ export default class App extends Component {
         action={this.startNewGame}
       />
     );
+    const btnLabel = this.state.section === 5 ? 'Закончить игру' : 'Следующий' +
+      ' вопрос';
     const end = this.state.endGame ? endGameComp : null;
     return (
       <>
-        <Logo src={logo} />
-        <AudioSwitcher
-          isMuteOn={this.state.isMuteOn}
-          mute={this.mute} />
-        <Score score={this.state.score} />
-        <main className="content">
-          <NavBar section={this.state.section} />
-          <Quiz
-            section={this.state.section}
-            randomID={this.state.randomID}
-            win={this.state.win}
-          />
-          <AnswerList
-            section={this.state.section}
-            selectAnswer={this.selectAnswer}
-          />
-          <Details
-            selected={this.state.selected}
-            section={this.state.section}
-            id={this.state.selectedID}
-          />
-          <Button
-            label="Следующий вопрос"
-            win={this.state.win}
-            action={this.nextLevel}
-            reset={this.styleAnswer}
-            selected={this.state.selected}
-            endGame={this.state.endGame}
-          />
-        </main>
+        <Container>
+          <Row className="text-center mb-2">
+            <Col className="d-flex justify-content-start logo" xs={12} md={4} sm={12}>
+              <Logo src={logo}/>
+            </Col>
+            <Col xs={4} md={4} sm={4} className="d-flex justify-content-end align-items-center muteOn">
+              <AudioSwitcher
+                isMuteOn={this.state.isMuteOn}
+                mute={this.mute}/>
+            </Col>
+            <Col className="d-flex justify-content-end align-items-center text-right score" xs={8} md={4} sm={8}>
+              <Score score={this.state.score}/>
+            </Col>
+          </Row>
+        </Container>
+        <Container className="content">
+          <Row className="mb-2">
+            <NavBar section={this.state.section}/>
+          </Row>
+          <Row>
+            <Quiz
+              section={this.state.section}
+              randomID={this.state.randomID}
+              win={this.state.win}
+            />
+          </Row>
+          <hr/>
+          <Row className="mb-2">
+            <Col md={12} lg={4}>
+              <AnswerList
+                section={this.state.section}
+                selectAnswer={this.selectAnswer}
+              />
+              <hr className="secondary"/>
+            </Col>
+            <Col md={12} lg={8}>
+              <Details
+                selected={this.state.selected}
+                section={this.state.section}
+                id={this.state.selectedID}
+              />
+            </Col>
+          </Row>
+          <Row>
+            <Button
+              label={btnLabel}
+              win={this.state.win}
+              action={this.nextLevel}
+              reset={this.styleAnswer}
+              selected={this.state.selected}
+              endGame={this.state.endGame}
+              section={this.state.section}
+            />
+          </Row>
+        </Container>
         {end}
       </>
     )

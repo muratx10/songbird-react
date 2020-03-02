@@ -1,31 +1,9 @@
-@import url("https://fonts.googleapis.com/css?family=Nunito:300,400,700&display=swap&subset=cyrillic");
-
-.content {
-  grid-area: main;
-  display: grid;
-  grid: 50px 25% minmax(315px, 2fr) 1fr / repeat(2, 1fr);
-  grid-row-gap: 15px;
-  grid-template-areas:
-    "nav nav"
-    "quiz quiz"
-    "list details"
-    "btn btn";
-
-  @media only screen and (max-width: 900px) {
-    grid: 50px 180px minmax(200px, 1fr) 1fr / repeat(2, 1fr);
-    grid-template-areas:
-      "nav nav"
-      "quiz quiz"
-      "list list"
-      "details details"
-      "btn btn";
+@media (max-width: 768px) {
+  .logo {
+    justify-content: center !important;
   }
 
-  @media only screen and (max-width: 576px) {
-    grid: 50px 180px minmax(200px, 330px) 1fr / repeat(2, 1fr);
-  }
-
-  @media only screen and (max-width: 480px) {
-    grid-row-gap: 35px;
+  .muteOn {
+    justify-content: flex-start !important;
   }
 }

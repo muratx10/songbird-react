@@ -1,5 +1,5 @@
 .answer-list {
-  width: 90%;
+  width: 100%;
   margin: 0;
   padding: 0;
   background: #222222;
@@ -18,10 +18,6 @@
 
   &:hover {
     background: lighten(#222222, 15%);
-  }
-
-  @media only screen and (max-width: 480px) {
-    font-size: 1.6rem;
   }
 }
 

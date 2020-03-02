@@ -1,13 +1,10 @@
 .score {
-  grid-area: score;
-  align-self: end;
-  justify-self: end;
+  font-size: 1.3rem;
   padding-right: 10px;
   padding-bottom: 5px;
-  font-size: 1.4rem;
   animation: scoreAnimate 300ms linear;
 
   @media only screen and (max-width: 480px) {
-    font-size: 2.5rem;
+    font-size: 1.3rem;
   }
 }

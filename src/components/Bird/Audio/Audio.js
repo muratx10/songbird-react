@@ -1,11 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Audio.scss';
 
 const Audio = ({ src }) => (
-  <div className="audioplayer">
+  <div className="audioplayer ml-2">
     {/* eslint-disable-next-line jsx-a11y/media-has-caption */}
-    <audio src={src} controls />
+    <audio src={src} controls width="100%" />
   </div>
 );
 
